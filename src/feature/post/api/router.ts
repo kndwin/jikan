@@ -30,6 +30,8 @@ export const router = createNextRoute(contract, {
       .values({
         ...args.body,
         authorId: 1,
+        updatedAt: new Date().toISOString(),
+        createdAt: new Date().toISOString(),
       })
       .returning()
       .all();
@@ -57,6 +59,7 @@ export const router = createNextRoute(contract, {
       .update(posts)
       .set({
         ...body,
+        updatedAt: new Date().toISOString(),
       })
       .where(eq(posts.id, Number(params.id)))
       .returning()

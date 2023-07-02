@@ -1,8 +1,11 @@
 import { useState } from "react";
+
+import { ClientInferResponseBody } from "@ts-rest/core";
 import { Button, Card, Label, Input, Textarea } from "@/components";
 import { queryClient } from "@/api/client";
 import { useQueryClient } from "@tanstack/react-query";
 import { TrashIcon, Pencil1Icon } from "@radix-ui/react-icons";
+import { contract } from "@/api/contract";
 
 export const ViewPosts = () => {
   const query = queryClient.post.getAllPosts.useQuery(["posts"]);
@@ -28,7 +31,7 @@ export const ViewPosts = () => {
 };
 
 type PostProps = {
-  post: any;
+  post: ClientInferResponseBody<typeof contract.post.getPost, 200>;
 };
 
 const Post = ({ post }: PostProps) => {
@@ -49,7 +52,12 @@ const Post = ({ post }: PostProps) => {
       {mode === "view" && (
         <>
           <Card.Header className="justify-between flex-row items-center">
-            <Card.Title>{post?.title}</Card.Title>
+            <div className="flex gap-2 items-center">
+              <p className="text-xs text-muted-foreground px-2 py-1 rounded bg-muted">
+                {new Date(post?.createdAt as string).toLocaleDateString()}
+              </p>
+              <Card.Title>{post?.title}</Card.Title>
+            </div>
             <div className="flex gap-2">
               <Button
                 variant="outline"
@@ -70,6 +78,7 @@ const Post = ({ post }: PostProps) => {
           </Card.Header>
           <Card.Content>
             <Card.Description>{post?.content}</Card.Description>
+            <Card.Description></Card.Description>
           </Card.Content>
         </>
       )}

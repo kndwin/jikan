@@ -6,6 +6,8 @@ export const posts = sqliteTable("posts", {
   title: text("title").notNull(),
   content: text("content").notNull(),
   authorId: integer("authorId").notNull(),
+  createdAt: text("createdAt").notNull(),
+  updatedAt: text("updatedAt").notNull(),
 });
 
 export const users = sqliteTable("users", {
