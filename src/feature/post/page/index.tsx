@@ -8,14 +8,19 @@ export const ViewPosts = () => {
   const query = queryClient.post.getAllPosts.useQuery(["posts"]);
 
   return (
-    <div className="p-2 flex gap-2">
-      <div className="flex-1 flex flex-col gap-4 max-w-xl mx-auto">
-        <h1 className="text-4xl font-extrabold">Posts</h1>
-        {query.data?.body.map((post) => (
-          <Post key={post?.id} post={post} />
-        ))}
+    <div className="flex gap-2">
+      <div className="max-h-screen overflow-y-auto w-full">
+        <div className="flex-1 flex flex-col gap-4 max-w-xl mx-auto py-4">
+          <h1 className="text-4xl font-extrabold">Posts</h1>
+          {query.data?.body.map((post) => (
+            <Post key={post?.id} post={post} />
+          ))}
+        </div>
       </div>
-      <CreatePost />
+
+      <div className="p-4">
+        <CreatePost />
+      </div>
     </div>
   );
 };
@@ -29,10 +34,13 @@ const Post = ({ post }: PostProps) => {
   const { handleUpdate } = useUpdatePost();
   const [mode, setMode] = useState<"view" | "edit">("view");
 
-	const handleUpdateSubmit = (e: React.FormEvent<HTMLFormElement>, id: number) => {
-		handleUpdate(e, id);
-		setMode("view");
-	}
+  const handleUpdateSubmit = (
+    e: React.FormEvent<HTMLFormElement>,
+    id: number
+  ) => {
+    handleUpdate(e, id);
+    setMode("view");
+  };
 
   return (
     <Card key={post?.id} className="w-full">
@@ -152,17 +160,18 @@ const useCreatePost = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (mutation.isLoading) return;
     const data = new FormData(e.currentTarget);
     const title = data.get("title") as string;
     const content = data.get("content") as string;
     mutation.mutate({ body: { content, title } });
   };
 
-  return { handleSubmit };
+  return { handleSubmit, mutation };
 };
 
 const CreatePost = () => {
-  const { handleSubmit } = useCreatePost();
+  const { handleSubmit, mutation } = useCreatePost();
   return (
     <Card className="w-fit h-fit">
       <Card.Header>
@@ -183,7 +192,9 @@ const CreatePost = () => {
             <Label htmlFor="content">Content</Label>
             <Textarea name="content" className="resize-none" />
           </div>
-          <Button type="submit">Submit</Button>
+          <Button type="submit">
+            {mutation.isLoading ? "Loading..." : "Create"}
+          </Button>
         </form>
       </Card.Content>
     </Card>
