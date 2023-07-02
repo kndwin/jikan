@@ -176,6 +176,7 @@ const useCreatePost = () => {
     const title = data.get("title") as string;
     const content = data.get("content") as string;
     mutation.mutate({ body: { content, title } });
+    e.currentTarget.reset();
   };
 
   return { handleSubmit, mutation };
@@ -196,12 +197,17 @@ const CreatePost = () => {
         >
           <div className="flex space-y-1.5 flex-col">
             <Label htmlFor="title">Title</Label>
-            <Input name="title" />
+            <Input name="title" minLength={1} required />
           </div>
 
           <div className="flex space-y-1.5 flex-col">
             <Label htmlFor="content">Content</Label>
-            <Textarea name="content" className="resize-none" />
+            <Textarea
+              name="content"
+              className="resize-none"
+              minLength={1}
+              required
+            />
           </div>
           <Button type="submit">
             {mutation.isLoading ? "Loading..." : "Create"}
