@@ -6,20 +6,44 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "db:push": "drizzle-kit push:sqlite"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.1.1",
+    "@libsql/client": "^0.2.2",
+    "@radix-ui/react-icons": "^1.3.0",
+    "@radix-ui/react-label": "^2.0.2",
+    "@radix-ui/react-slot": "^1.0.2",
+    "@tanstack/react-query": "^4.29.19",
+    "@ts-rest/core": "^3.26.3",
+    "@ts-rest/next": "^3.26.3",
+    "@ts-rest/react-query": "^3.26.3",
     "@types/node": "20.3.3",
     "@types/react": "18.2.14",
     "@types/react-dom": "18.2.6",
     "autoprefixer": "10.4.14",
+    "better-sqlite3": "^8.4.0",
+    "class-variance-authority": "^0.6.1",
+    "clsx": "^1.2.1",
+    "dotenv": "^16.3.1",
+    "drizzle-orm": "^0.27.0",
+    "drizzle-zod": "^0.4.4",
     "eslint": "8.44.0",
     "eslint-config-next": "13.4.7",
     "next": "13.4.7",
     "postcss": "8.4.24",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-hook-form": "^7.45.1",
+    "tailwind-merge": "^1.13.2",
     "tailwindcss": "3.3.2",
-    "typescript": "5.1.6"
+    "tailwindcss-animate": "^1.0.6",
+    "typescript": "5.1.6",
+    "zod": "^3.21.4"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.4",
+    "drizzle-kit": "^0.19.3"
   }
 }
