@@ -4,7 +4,7 @@ import { initQueryClient } from "@ts-rest/react-query";
 import { contract } from "./contract";
 
 const clientConfig = {
-  baseUrl: `${process.env.NEXT_PUBLIC_VERCEL_URL}/api`,
+  baseUrl: `/api`,
   baseHeaders: {},
 };
 
