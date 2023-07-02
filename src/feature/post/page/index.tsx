@@ -12,9 +12,11 @@ export const ViewPosts = () => {
       <div className="max-h-screen overflow-y-auto w-full">
         <div className="flex-1 flex flex-col gap-4 max-w-xl mx-auto py-4">
           <h1 className="text-4xl font-extrabold">Posts</h1>
-          {query.data?.body.map((post) => (
-            <Post key={post?.id} post={post} />
-          ))}
+          {query.data?.body
+            .sort((a, b) => b.id - a.id)
+            .map((post) => (
+              <Post key={post?.id} post={post} />
+            ))}
         </div>
       </div>
 
