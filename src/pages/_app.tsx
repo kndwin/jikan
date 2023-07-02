@@ -1,4 +1,7 @@
 import "@/components/global.css";
+
+import { ThemeProvider } from "next-themes";
+
 import type { AppProps } from "next/app";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import type { ReactElement, ReactNode } from "react";
@@ -18,7 +21,9 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout || ((page) => page);
   return (
     <QueryClientProvider client={client}>
-			{getLayout(<Component {...pageProps} />)}
+      <ThemeProvider attribute="class" defaultTheme="dark">
+        {getLayout(<Component {...pageProps} />)}
+      </ThemeProvider>
     </QueryClientProvider>
   );
 }
