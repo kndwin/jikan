@@ -13,7 +13,7 @@ export const ViewPosts = () => {
         <div className="flex-1 flex flex-col gap-4 max-w-xl mx-auto py-4">
           <h1 className="text-4xl font-extrabold">Posts</h1>
           {query.data?.body
-            .sort((a, b) => b.id - a.id)
+            .sort((a, b) => Number(b?.id) - Number(a?.id))
             .map((post) => (
               <Post key={post?.id} post={post} />
             ))}
