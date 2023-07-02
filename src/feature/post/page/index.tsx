@@ -83,7 +83,7 @@ const Post = ({ post }: PostProps) => {
         </>
       )}
       {mode === "edit" && (
-        <form onSubmit={(e) => handleUpdateSubmit(e, post.id)}>
+        <form onSubmit={(e) => handleUpdateSubmit(e, Number(post?.id))}>
           <Card.Header className="justify-between flex-row items-center gap-2 space-y-0">
             <Input name="title" defaultValue={post?.title} />
             <div className="flex gap-2 items-center">
